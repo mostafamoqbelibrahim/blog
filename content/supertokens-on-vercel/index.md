@@ -20,7 +20,7 @@ security.
 -   **Free-tier friendly and open-source** makes SuperTokens accessible for projects at any scale. Vercel provides one production URL per app and one unique inspect URL per deployment, and SuperTokens works seamlessly with this dynamic URL structure. The open-source nature ensures transparency and eliminates vendor lock-in concerns while providing enterprise-grade authentication capabilities.
 -   **Native Next.js API route integration** means SuperTokens functions as a standard Next.js serverless API without requiring separate backend infrastructure. The authentication logic runs within Next.js API routes, simplifying deployment and reducing operational complexity compared to managing separate authentication services.
 -   **Comprehensive authentication features** include multi-tenancy support, passwordless authentication, social login integration, email/password authentication, and custom authentication flows. Organizations can start with basic authentication and progressively add capabilities as requirements evolve.
--   **Built-in security features** provide protection against common attack vectors, including token theft detection, CSRF protection, session hijacking prevention, and secure cookie handling. These security mechanisms work automatically without requiring manual security implementation or maintenance.
+-   **Built-in security features** provide protection against common attack vectors, including token theft detection, CSRF protection, session hijacking prevention, and secure cookie handling. These security mechanisms work automatically, without requiring manual security implementation or maintenance.
 
 ## **Prerequisites**
 
@@ -35,7 +35,7 @@ Before beginning implementation, ensure the following tools and accounts are ava
 **Deployment requirements:**
 
 -   GitHub account for code repository hosting
--   Vercel account (free tier sufficient for getting started)
+-   Vercel account (free tier is sufficient for getting started)
 -   SuperTokens Core instance (self-hosted or managed service)
 
 **Configuration preparation:**
@@ -67,8 +67,8 @@ compatibility, select the following:
 
 These packages provide the core authentication functionality:
 
--   `supertokens-node`: Backend SDK for API routes and session management
--   `supertokens-auth-react`: Frontend components and React integration
+-   `supertokens-node`: Backend SDK for API routes and session management.
+-   `supertokens-auth-react`: Frontend components and React integration.
 
 ## **Step 2 -- Set Up SuperTokens Backend**
 
@@ -307,9 +307,9 @@ export default function ProtectedPage() {
 }
 ```
 
-This page checks if a valid session exists. If not signed in → redirects user to `/auth`.
+This page checks if a valid session exists. If not signed in, the user is redirected to `/auth`.
 
-If signed in → displays their `userId` or token payload.
+If signed in, the `userId` or token payload is displayed.
 
 **Initialize SuperTokens (Client Side)**
 
@@ -376,7 +376,7 @@ NEXT_PUBLIC_WEBSITE_DOMAIN=https://your-app.vercel.app
 
 For managed SuperTokens hosting, replace the `SUPERTOKENS_CONNECTION_URI` with your dedicated instance URL. Self-hosted deployments require ensuring the SuperTokens Core service is publicly accessible via HTTPS.
 
-**Dynamic URL configuration** for Vercel preview deployments requires using `process.env.VERCEL_URL` in backend configuration:
+**Dynamic URL configuration** for Vercel preview deployments requires using `process.env.VERCEL_URL` in the backend configuration:
 
 ```js
 appInfo: {
@@ -397,15 +397,15 @@ Vercel deployment follows a straightforward process for Next.js applications wit
 
 **Prepare for deployment:**
 
-1.  Commit all changes to your Git repository:
+1.  Commit all changes to your GitHub repository:
 ```js
 git add .
 git commit -m "Add SuperTokens authentication"
 git push origin main
 ```
-2.  Navigate to the Vercel dashboard and import your repository
-3.  Configure environment variables in Vercel project settings
-4.  Deploy the application
+2.  Navigate to the Vercel dashboard and import your repository.
+3.  Configure environment variables in Vercel project settings.
+4.  Deploy the application.
 
 **Vercel automatically:**
 
@@ -418,9 +418,9 @@ git push origin main
 **Important deployment considerations:**
 
 -   This only works if the frontend and backend of your application have the same domain. If your backend is hosted separately, configure `apiDomain` to point to your backend server.
--   Ensure CORS configuration allows requests from Vercel preview URLs
--   Verify environment variables are set correctly in the Vercel dashboard
--   Test authentication flows on the preview deployment before promoting to production
+-   Ensure the CORS configuration allows requests from Vercel preview URLs.
+-   Verify environment variables are set correctly in the Vercel dashboard.
+-   Test authentication flows on the preview deployment before promoting to production.
 
 ## **Step 6 -- Test Auth Flow**
 
@@ -428,10 +428,10 @@ Verify authentication implementation works correctly across all flows.
 
 **Registration flow testing:**
 
-1.  Navigate to the `/auth` route in your deployed application
-2.  Click \"Sign Up\" and create a new account
-3.  Verify email verification flow (if enabled)
-4.  Confirm successful redirect after registration
+1.  Navigate to the `/auth` route in your deployed application.
+2.  Click \"Sign Up\" and create a new account.
+3.  Verify email verification flow (if enabled).
+4.  Confirm successful redirect after registration.
 
 ![Supertokens demo](Supertokens-demo.png)
 
@@ -474,10 +474,10 @@ export async function GET(request: NextRequest) {
 
 **Cookie and session persistence:**
 
--   Verify session cookies are set with the correct security flags
--   Test session persistence across page navigation
--   Confirm that the logout functionality clears the session properly
--   Validate that session refresh works without user interaction
+-   Verify session cookies are set with the correct security flags.
+-   Test session persistence across page navigation.
+-   Confirm that the logout functionality clears the session properly.
+-   Validate that session refresh works without user interaction.
 
 ## **Optional: Enable Social or Passwordless Login**
 
@@ -529,13 +529,13 @@ SuperTokens architecture aligns well with Vercel\'s serverless platform, providi
 -   **Frontend UI theming** provides complete customization of authentication interfaces without requiring custom component development. CSS variables and component overrides enable matching authentication UI to application design systems.
 -   **Type-safe claims and user roles** integrate with TypeScript for compile-time type checking of user permissions and session claims, reducing runtime errors and improving developer experience.
 
-## **Limitations & Workarounds**
+## **Limitations and Workarounds**
 
 Understanding platform constraints helps avoid common implementation pitfalls.
 
 -   **Cold start latency** affects serverless functions on Vercel\'s free and hobby tiers. SuperTokens API routes experience slight latency during cold starts as the Node.js runtime initializes. Vercel Pro plans reduce cold start frequency through reserved capacity. For critical authentication endpoints, consider keeping functions warm through periodic health check requests.
 -   **Edge runtime compatibility** remains limited. SuperTokens relies on Node.js APIs unsupported in Vercel\'s edge runtime, requiring standard serverless API routes rather than edge functions. This limitation affects global latency for authentication operations but typically remains acceptable for most applications.
--   **Self-hosted SuperTokens Core requirements** mandate public HTTPS accessibility. Organizations self-hosting SuperTokens Core must expose the service to the internet or configure VPN connectivity between Vercel deployments and private networks. Managed SuperTokens hosting eliminates these networking concerns.
+-   **Self-hosted SuperTokens Core requirements** mandate public HTTPS accessibility. Organizations self-hosting SuperTokens Core must expose the service to the internet, or configure VPN connectivity between Vercel deployments and private networks. Managed SuperTokens hosting eliminates these networking concerns.
 -   **Preview deployment considerations** require dynamic URL configuration to support Vercel\'s unique preview URLs for each pull request. The `VERCEL_URL` environment variable enables this functionality but requires proper configuration in `appInfo`.
 
 ## **Frequently Asked Questions**
@@ -545,9 +545,9 @@ Yes, managed SuperTokens hosting works seamlessly with Vercel deployments. Point
 -   **Can I deploy to Vercel edge functions?**
 Not currently. SuperTokens requires Node.js APIs unavailable in Vercel\'s edge runtime. Use standard serverless API routes, which provide sufficient performance for most authentication workloads while supporting SuperTokens functionality.
 -   **How do I handle custom domains?**
-Configure custom domains through Vercel dashboard, then update environment variables to reflect custom domain URLs. Ensure `apiDomain` and `websiteDomain` match your custom domain configuration.
+Configure custom domains through the Vercel dashboard, then update environment variables to reflect custom domain URLs. Ensure `apiDomain` and `websiteDomain` match your custom domain configuration.
 -   **What about database requirements?**
-SuperTokens Core handles user data storage internally. Applications using self-hosted Core need to configure database connectivity (PostgreSQL, MySQL, or MongoDB supported). Managed SuperTokens hosting includes database infrastructure.
+SuperTokens Core handles user data storage internally. Applications using self-hosted Core need to configure database connectivity (PostgreSQL, MySQL, or MongoDB are supported). Managed SuperTokens hosting includes database infrastructure.
 
 ## **Conclusion**
 

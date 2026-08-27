@@ -247,7 +247,7 @@ One rule governs placement: policy is evaluated at the tool server, never inside
 
 ## Real-Time Revocation With CAEP
 
-A capability token valid for 120 seconds is still valid for 120 seconds after the user's account is disabled. Continuous Access Evaluation Profile (CAEP) closes this gap by pushing security events (`session-revoked`, `credential-change`, `device-compliance-change`) from your identity provider to tool servers via the OpenID Shared Signals Framework (RFC 8417). The spec explicitly covers "human or robotic users," making agent runtimes first-class. Treat CAEP as what makes a kill switch real: revocation on the next token refresh is not a kill switch when the agent already has the token it needs.
+A capability token valid for 120 seconds is still valid for 120 seconds after the user's account is disabled. Continuous Access Evaluation Profile (CAEP) closes this gap by pushing security events (`session-revoked`, `credential-change`, `device-compliance-change`) from your identity provider to tool servers via the OpenID Shared Signals Framework, which profiles Security Event Tokens (RFC 8417) and pushes them over HTTP (RFC 8935). The spec explicitly covers "human or robotic users," making agent runtimes first-class. Treat CAEP as what makes a kill switch real: revocation on the next token refresh is not a kill switch when the agent already has the token it needs.
 
 A receiver is two pieces: an endpoint that accepts and verifies incoming SETs, and a revocation set the tool server checks before executing any action.
 

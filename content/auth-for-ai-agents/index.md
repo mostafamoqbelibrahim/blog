@@ -7,7 +7,9 @@ category: "programming"
 author: "Mostafa Ibrahim"
 ---
 
-In February 2026, Meta alignment director [Summer Yue](https://www.businessinsider.com/meta-ai-alignment-director-openclaw-email-deletion-2026-2) connected an OpenClaw agent to her email with one instruction: suggest what to archive or delete, but take no action without approval. Weeks of clean test runs. Then, pointed at her real inbox, context-window compaction (the routine step that summarizes older context to free tokens) summarized the safety instruction away. The agent deleted over 200 emails. Yue typed "STOP OPENCLAW." The agent acknowledged and kept deleting. She ran to her Mac Mini to physically kill the process.
+In February 2026, Meta alignment director [Summer Yue](https://www.businessinsider.com/meta-ai-alignment-director-openclaw-email-deletion-2026-2) connected an OpenClaw agent to her email, and gave it one instruction: suggest what to archive or delete, but take no action without approval. For weeks, the test runs were clean.
+
+Then she pointed it at her real inbox. During that run, context-window compaction, the routine step that summarizes older context to free up tokens, kicked in and quietly summarized the safety instruction away. Without that constraint in place, the agent started deleting emails, and by the time Yue noticed, it had already removed over 200. She typed "STOP OPENCLAW." But the agent simply acknowledged the message and kept deleting anyway. So she ran to her Mac Mini and physically killed the process.
 
 Nothing was compromised. No token stolen, no prompt injection, no credential leak. Authentication succeeded. API-level authorization succeeded. The identity layer had no mechanism to intervene, because there was no third check. That gap, and the architecture that closes it, is what this post covers.
 

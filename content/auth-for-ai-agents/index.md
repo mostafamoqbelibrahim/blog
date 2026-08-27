@@ -466,15 +466,25 @@ DPoP verification and the PDP call are not SuperTokens features. They belong in 
 
 ## FAQ
 
-**What is the difference between AI agent authentication and AI agent authorization?** Authentication establishes which agent is calling and which user it acts for. Authorization is two separate questions: whether the token carries the right scope, and whether policy permits this specific call with these arguments right now. Most agent incidents involve a correctly authenticated agent whose specific action nobody checked.
+### **What is the difference between AI agent authentication and AI agent authorization?** 
 
-**Do I need OAuth 2.1 for my MCP server?** For a remote MCP server, yes. The spec requires OAuth 2.1, mandates RFC 8707 Resource Indicators for audience binding, and requires protected resource metadata at `/.well-known/oauth-protected-resource`. Local stdio servers are the exception; credentials arrive from the host process.
+Authentication establishes which agent is calling and which user it acts for. Authorization is two separate questions: whether the token carries the right scope, and whether policy permits this specific call with these arguments right now. Most agent incidents involve a correctly authenticated agent whose specific action nobody checked.
 
-**What is DPoP and why does it matter for AI agents specifically?** DPoP binds a token to a key the caller proves possession of on every request, so a stolen token alone is useless. It matters more for agents than browsers because agent tokens travel to many third-party tool servers over long-running tasks, multiplying interception risk. DPoP works without the certificate infrastructure mTLS requires.
+### **Do I need OAuth 2.1 for my MCP server?** 
 
-**Can an AI agent's token have more access than the user who invoked it?** It must not. Scopes narrow at every RFC 8693 token exchange and never widen, enforced in code at each token-issuing endpoint. An agent requesting a scope its parent session does not hold is a signal worth alerting on.
+For a remote MCP server, yes. The spec requires OAuth 2.1, mandates RFC 8707 Resource Indicators for audience binding, and requires protected resource metadata at `/.well-known/oauth-protected-resource`. Local stdio servers are the exception; credentials arrive from the host process.
 
-**What happens if an agent's token is stolen mid-session?** Three controls compound. Short expiry bounds the window. DPoP makes the token unusable without the bound key. CAEP pushes a revocation event to tool servers so in-flight tokens are dropped immediately. Audience restriction limits replay to one tool server.
+### **What is DPoP and why does it matter for AI agents specifically?** 
+
+DPoP binds a token to a key the caller proves possession of on every request, so a stolen token alone is useless. It matters more for agents than browsers because agent tokens travel to many third-party tool servers over long-running tasks, multiplying interception risk. DPoP works without the certificate infrastructure mTLS requires.
+
+### **Can an AI agent's token have more access than the user who invoked it?** 
+
+It must not. Scopes narrow at every RFC 8693 token exchange and never widen, enforced in code at each token-issuing endpoint. An agent requesting a scope its parent session does not hold is a signal worth alerting on.
+
+### **What happens if an agent's token is stolen mid-session?** 
+
+Three controls compound. Short expiry bounds the window. DPoP makes the token unusable without the bound key. CAEP pushes a revocation event to tool servers so in-flight tokens are dropped immediately. Audience restriction limits replay to one tool server.
 
 ## Summary
 

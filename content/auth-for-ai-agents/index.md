@@ -13,7 +13,7 @@ Nothing was compromised. No token stolen, no prompt injection, no credential lea
 
 ## Why Classic OAuth and Session Authentication Break for AI Agents
 
-OAuth was designed around a present human. A user clicks approve, a token is issued, an application spends it while the user waits. AI agent authentication breaks three of those assumptions.
+[OAuth](https://supertokens.com/blog/openid-connect-vs-oauth2) was designed around a present human. A user clicks approve, a token is issued, an application spends it while the user waits. AI agent authentication breaks three of those assumptions.
 
 - **Agents act after the session ends.** A user kicks off a task and closes the laptop. Session tokens representing "this human is here right now" are spent by a process running autonomously for the next forty minutes.
 - **Agents chain tool calls without pausing.** A single request fans out into a dozen downstream calls. A compromise at step three propagates through every subsequent step with no human checkpoint.
@@ -305,7 +305,7 @@ Three details separate a working gate from theatre. The gate is enforced at the 
 
 ![SuperTokens](./Supertokens.png)
 
-[SuperTokens](https://supertokens.com/) covers the session and token layer of this architecture, and ships an [MCP plugin](https://supertokens.com/docs/authentication/ai-authentication) that handles the OAuth flow the specification requires. Two notes before the code: the MCP plugin is currently in beta and may change, and it depends on the OAuth2 recipe, which is a paid feature currently available for the Node SDK.
+[SuperTokens](https://supertokens.com/) covers the [session](https://supertokens.com/docs/post-authentication/session-management/introduction) and token layer of this architecture, and ships an [MCP plugin](https://supertokens.com/docs/authentication/ai-authentication) that handles the OAuth flow the specification requires. Two notes before the code: the [MCP plugin](https://supertokens.com/blog/supertokens-mcp-toolkit) is currently in beta and may change, and it depends on the OAuth2 recipe, which is a paid feature currently available for the Node SDK.
 
 ### **Issuing an Agent Session With Narrowed Claims**
 
